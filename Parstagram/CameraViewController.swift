@@ -20,7 +20,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         let post = PFObject(className: "Posts")
         
         post["caption"] = commentField.text!
-        post["author"] = PFUser.current()!
+        //post["author"] = PFUser.current()!
         
         let imageData = imageView.image!.pngData()
         let file = PFFileObject(data: imageData!)
@@ -58,7 +58,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage
         let size = CGSize(width: 300, height: 300)
-        let scaledImage = image.af_imageScaled(to: size)
+        let scaledImage = image.af_imageAspectScaled(toFill: size)
         
         imageView.image = scaledImage
         
